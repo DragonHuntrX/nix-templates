@@ -21,7 +21,7 @@
       rec {
         # Executed by `nix build`
         packages.default = toolchain.buildRustPackage {
-          pname = self.name;
+          pname = "template";
           version = "0.1.0";
           src = ./.;
           cargoLock.lockFile = ./Cargo.lock;
