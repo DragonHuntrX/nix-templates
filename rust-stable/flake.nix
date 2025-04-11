@@ -5,22 +5,23 @@
     utils.url = "github:numtide/flake-utils";
   };
 
-  outputs = {
-    self,
-    nixpkgs,
-    utils,
-    ...
-  }:
-    utils.lib.eachDefaultSystem
-    (
-      system: let
-        pkgs = import nixpkgs {inherit system;};
+  outputs =
+    {
+      self,
+      nixpkgs,
+      utils,
+      ...
+    }:
+    utils.lib.eachDefaultSystem (
+      system:
+      let
+        pkgs = import nixpkgs { inherit system; };
         toolchain = pkgs.rustPlatform;
-      in rec
-      {
+      in
+      rec {
         # Executed by `nix build`
         packages.default = toolchain.buildRustPackage {
-          pname = "template";
+          pname = self.name;
           version = "0.1.0";
           src = ./.;
           cargoLock.lockFile = ./Cargo.lock;
@@ -30,7 +31,7 @@
         };
 
         # Executed by `nix run`
-        apps.default = utils.lib.mkApp {drv = packages.default;};
+        apps.default = utils.lib.mkApp { drv = packages.default; };
 
         # Used by `nix develop`
         devShells.default = pkgs.mkShell {
