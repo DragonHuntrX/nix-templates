@@ -143,6 +143,24 @@
             the template.
           '';
         };
+        rust-naersk = {
+          path = ./rust-naersk;
+          description = "Rust development template using naersk";
+          welcomeText = ''
+            You have created a Rust template that will help you manage
+            your project. See the README for instructions on how to use
+            the template.
+          '';
+        };
+        rust-naersk-cross = {
+          path = ./rust-naersk-cross;
+          description = "Rust development template using naersk for cross compilation";
+          welcomeText = ''
+            You have created a Rust template that will help you manage
+            your project. See the README for instructions on how to use
+            the template.
+          '';
+        };
 
         slides = {
           path = ./slides;
